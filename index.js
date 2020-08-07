@@ -1,23 +1,14 @@
 const express = require("express");
-const { findPostComments } = require("./data/db");
-const server = express();
+const server = require("./server")
+
 
 server.use(express.json());
 
-server.post("/api/posts", (req, res) => {
-    const post = req.body
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+  });
 
-    if (!post.title || !post.content) {
-        res.status(400).json({ errorMessage: "Please provide title and contents for the post." })
-    }
-    else if (!post) {
-        res.status(500).json({ error: "There was an error while saving the post to the database" })
-    }
-    else {
-        posts.insert(post)
-        res.status(201).json(post)
-    }
-})
+
 
 server.post("/api/posts/:id/comments", (req, res) => {
     const post = req.body
